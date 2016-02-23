@@ -152,9 +152,13 @@ class Interpreter():
 
 
             if self.x != None and self.z != None:
-                print 'Moving to X: {0}, Z: {1} with speed: {2}'.format(self.x, self.z, self.speed)
-                print 'ACHTUNG! Es wird aktuell jede Achse mit der angegebenen Geschwindigkeit verfahren!'
-                raw_input('Fortfahren?')
+                delta_x = abs(self.x - self.X.get_position())
+                delta_z = abs(self.z - self.Z.get_position())
+                ratio = delta_z / float(delta_x)
+                speed_x = self.speed / (1+ratio**2)**0.5
+                speed_z = speed_x * ratio
+                print 'Moving to X: {0} with speed {1}'.format(self.x, speed_x)
+                print 'Moving to Z: {0} with speed {1}'.format(self.z, speed_z)
                 self.X.move_abs(self.x, self.speed)
                 self.Z.move_abs(self.z, self.speed)
             elif self.x != None:
