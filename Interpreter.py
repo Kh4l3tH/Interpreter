@@ -67,10 +67,6 @@ class Interpreter():
         elif line == 'M100':
             print 'Spindel ein'
             self.C.rotate(300)
-        # elif line == 'M101':
-        #     print 'Spindel verlangsamen'
-        #     raw_input('Das macht eigentlich keinen Sinn mehr')
-        #     # self.C.rotate(self.C.umin_default / 2)
         elif line == 'M102':
             print 'Spindel aus'
             self.C.stop()
@@ -84,17 +80,9 @@ class Interpreter():
             self.Z.move_abs(0)
             self.X.wait()
             self.Z.wait()
-            # raw_input('Hier wird kein Sleep durchgefueht, da auf Achsen gewartet wird!')
-            # print 'Sleep 1.0s'
-            # sleep(1)
             print 'Pin 10: {0}'.format(self.pport.getPin(10)) # False -> X in Home-Position
             print 'Pin 12: {0}'.format(self.pport.getPin(12)) # False -> Z in Home-Position
-            print 'Ob Achsen in Home-Position sind wird nicht mehr ueberprueft!'
-            #if self.pport.getPin(10) == False and self.pport.getPin(12) == False:
             self.pport.setPin(14, True)
-            #else:
-            #    self.pport.setPin(14, False)
-            #    raise ValueError('Maschine befindet sich nicht in Home-Position!')
         elif line == 'M115':
             print 'Greifer 8 schliessen'
             self.pport.setPin(9, True)
