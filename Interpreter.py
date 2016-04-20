@@ -76,10 +76,10 @@ class Interpreter():
             self.pport.setPin(14, False)
         elif line == 'M104':
             print 'In Home Position fahren und Bereitschaftssignal ein'
-            self.X.move_abs(0)
             self.Z.move_abs(0)
-            self.X.wait()
+            self.X.move_abs(0)
             self.Z.wait()
+            self.X.wait()
             print 'Pin 10: {0}'.format(self.pport.getPin(10)) # False -> X in Home-Position
             print 'Pin 12: {0}'.format(self.pport.getPin(12)) # False -> Z in Home-Position
             self.pport.setPin(14, True)
